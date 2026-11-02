@@ -1,93 +1,89 @@
-# Kingdom-2
+# Kingdom-2 P0 core specification
 
-Kingdom-2 is a reproducible, adaptive computational and research system designed to coordinate evidence, models, dependencies, and verification.
+This is the minimum viable implementation target for the first milestone.
 
-The project is not an Android app. Android is one interface for observing and controlling the system, while the core engine remains platform-independent and testable.
+## Goals
 
-## Purpose
+The P0 core should produce a reproducible and reviewable foundation for Kingdom-2 before Android interface work expands.
 
-Kingdom-2 should help teams and researchers:
+## In scope
 
-- Bring together information, computational methods, models, and external data.
-- Represent evidence, uncertainty, contradictions, and dependencies explicitly.
-- Evaluate competing hypotheses and algorithms.
-- Identify missing information, invalid assumptions, and failed dependencies.
-- Test proposed solutions against measurable criteria.
-- Preserve exactly how results were produced so they can be reproduced and challenged.
-- Improve methods using verified results rather than unsupported confidence.
+### 1. Evidence and provenance
 
-## Governing principle
+- store evidence records
+- record source metadata and assumptions
+- track confidence and uncertainty
+- maintain provenance lineage
 
-No result is trusted merely because the system produced it.
+### 2. Dependency graph
 
-Every result should carry:
+- model data and computation dependencies
+- identify missing or stale dependencies
+- expose validation status
+- flag dependency failures that affect results
 
-- provenance
-- assumptions
-- execution history
-- dependency state
-- test or verification evidence
-- uncertainty and contradictions
+### 3. Run manifests
 
-## Architecture summary
+- launch metadata and configuration capture
+- input and output tracking
+- environment capture
+- reproducibility hash generation
 
-Android interface
-- dashboard
-- controls
-- alerts
-- evidence review
-- approval and audit workflows
+### 4. Verification engine
 
-Versioned API / service boundary
-- stable contracts between client and core engine
-- permission-aware operations
-- authenticated access to sensitive workflows
+- create verification entries
+- record pass/fail/inconclusive outcomes
+- attach evidence references
+- distinguish independent checks from routine tests
 
-Kingdom-2 core engine
-- evidence and provenance tracking
-- dependency graph management
-- state management and run manifests
-- verification logic
-- execution and reproducibility control
+### 5. Test pipeline
 
-Data and computation layer
-- models
-- external integrations
-- scientific workflows
-- reproducible artifacts
-- test and validation records
+- unit tests for core entities
+- integration tests for the API contract
+- regression tests for verification logic
+- reproducibility checks for manifest handling
 
-## Verification-first engineering
+## Out of scope for P0
 
-Kingdom-2 is built around verification, independent checks, and continuous improvement.
+- full Android UI polish
+- broad external integrations
+- advanced analytics dashboards
+- operational automation beyond the core verification flow
 
-The system should only promote work that:
+## Definition of done
 
-- has a baseline measurement
-- includes reproducible inputs
-- passes relevant tests
-- records failures and limitations
-- preserves provenance and run metadata
-- can be independently reviewed or reproduced
+P0 is complete when:
 
-## Project documentation
+- a run can be created and tracked with a manifest
+- all evidence records include provenance
+- dependency freshness can be queried
+- verification status can be attached to results
+- test reports are stored and reviewable
+- unknown and conflicting evidence remain visible
+- a deterministic example workflow can be executed and re-run
 
-- [docs/architecture.md](docs/architecture.md)
-- [docs/verification.md](docs/verification.md)
-- [docs/scorecard.md](docs/scorecard.md)
-- [docs/roadmap.md](docs/roadmap.md)
+## Required example workflow
 
-## Immediate focus
+The project should include one bounded, real example that demonstrates the system end-to-end. It should include:
 
-The first milestone is a P0 core foundation, not a polished interface:
+- an input dataset or fixture
+- a reproducible manifest
+- a run execution result
+- a dependency graph
+- verification result
+- a stored test report
 
-1. Define core data contracts
-2. Record provenance and run manifests
-3. Implement verification and dependency tracking
-4. Add reproducibility and regression testing
-5. Then build Android against the stable API
+This is the first concrete proof that Kingdom-2 is not just a conceptual design but a working system model.
 
-## Core rule
+## Acceptance gates
 
-Android is an observation and control interface. It is not the source of truth.
-The core engine owns correctness, evidence, provenance, reproducibility, and verification.
+Every change in P0 should pass:
+
+- unit tests covering core models
+- integration tests for API endpoints
+- regression tests for verification behavior
+- reproducibility checks for the example workflow
+
+## Immediate next step
+
+The next implementation step is to create the core domain model and a minimal service scaffold that supports the EvidenceRecord, DependencyNode, RunManifest, VerificationResult, and TestReport contracts.
