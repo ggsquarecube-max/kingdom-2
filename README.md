@@ -1,89 +1,58 @@
-# Kingdom-2 P0 core specification
+# Kingdom-2
 
-This is the minimum viable implementation target for the first milestone.
+Kingdom-2 is a reproducible, adaptive computational and research system designed to coordinate evidence, models, dependencies, and verification.
 
-## Goals
+This repository now includes the first implementation scaffold for the P0 core: a minimal Python package with core domain models, a verification layer, a demonstration workflow, and tests.
 
-The P0 core should produce a reproducible and reviewable foundation for Kingdom-2 before Android interface work expands.
+## Project purpose
 
-## In scope
+Kingdom-2 is not an Android-first project. Android is a client interface for the system, while the core engine remains platform-independent, testable, and evidence-driven.
 
-### 1. Evidence and provenance
+## Current implementation state
 
-- store evidence records
-- record source metadata and assumptions
-- track confidence and uncertainty
-- maintain provenance lineage
+The repository includes:
 
-### 2. Dependency graph
+- a Python core package under `src/kingdom2`
+- data contracts for evidence, dependencies, manifests, verification results, and proposals
+- a validation and verification layer
+- a demonstration workflow that shows how a run is recorded and checked
+- a minimal pytest suite to validate the P0 model
 
-- model data and computation dependencies
-- identify missing or stale dependencies
-- expose validation status
-- flag dependency failures that affect results
+## Directory structure
 
-### 3. Run manifests
+```text
+.
+├── README.md
+├── pyproject.toml
+├── .gitignore
+├── src/
+│   └── kingdom2/
+│       ├── __init__.py
+│       ├── models.py
+│       ├── verification.py
+│       └── example_workflow.py
+├── tests/
+│   └── test_core_models.py
+├── docs/
+│   ├── architecture.md
+│   ├── verification.md
+│   ├── scorecard.md
+│   ├── roadmap.md
+│   ├── core-data-model.md
+│   ├── api-contract.md
+│   └── p0-core-spec.md
+└──
+```
 
-- launch metadata and configuration capture
-- input and output tracking
-- environment capture
-- reproducibility hash generation
+## Getting started
 
-### 4. Verification engine
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .[dev]
+pytest -q
+```
 
-- create verification entries
-- record pass/fail/inconclusive outcomes
-- attach evidence references
-- distinguish independent checks from routine tests
+## Core rule
 
-### 5. Test pipeline
-
-- unit tests for core entities
-- integration tests for the API contract
-- regression tests for verification logic
-- reproducibility checks for manifest handling
-
-## Out of scope for P0
-
-- full Android UI polish
-- broad external integrations
-- advanced analytics dashboards
-- operational automation beyond the core verification flow
-
-## Definition of done
-
-P0 is complete when:
-
-- a run can be created and tracked with a manifest
-- all evidence records include provenance
-- dependency freshness can be queried
-- verification status can be attached to results
-- test reports are stored and reviewable
-- unknown and conflicting evidence remain visible
-- a deterministic example workflow can be executed and re-run
-
-## Required example workflow
-
-The project should include one bounded, real example that demonstrates the system end-to-end. It should include:
-
-- an input dataset or fixture
-- a reproducible manifest
-- a run execution result
-- a dependency graph
-- verification result
-- a stored test report
-
-This is the first concrete proof that Kingdom-2 is not just a conceptual design but a working system model.
-
-## Acceptance gates
-
-Every change in P0 should pass:
-
-- unit tests covering core models
-- integration tests for API endpoints
-- regression tests for verification behavior
-- reproducibility checks for the example workflow
-
-## Immediate next step
-
-The next implementation step is to create the core domain model and a minimal service scaffold that supports the EvidenceRecord, DependencyNode, RunManifest, VerificationResult, and TestReport contracts.
+Android is an observation and control interface. The core engine owns correctness, provenance, verification, and reproducible execution.
